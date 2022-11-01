@@ -27,13 +27,15 @@ function App() {
     setInput(e.currentTarget.value);
   };
 
-  const handleDone = (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
+  const handleSwitch = (
+    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
+  ) => {
     const id = e.currentTarget.dataset.id as string;
     setTodos((prev) => {
       const copy = [...prev];
       const index = copy.findIndex((item) => item.id === id);
       const todo = copy[index];
-      copy.splice(index, 1, { id, content: todo.content, done: true });
+      copy.splice(index, 1, { id, content: todo.content, done: !todo.done });
       return copy;
     });
   };
@@ -60,10 +62,17 @@ function App() {
       </form>
       <TodoList
         todos={todos}
-        handleDone={handleDone}
+        handleSwitch={handleSwitch}
         handleDelete={handleDelete}
+        isTodo={true}
       />
       <hr />
+      <TodoList
+        todos={todos}
+        handleSwitch={handleSwitch}
+        handleDelete={handleDelete}
+        isTodo={false}
+      />
     </div>
   );
 }
