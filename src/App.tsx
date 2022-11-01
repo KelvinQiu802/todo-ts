@@ -1,7 +1,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import './App.css';
-import { Todo } from './utils/iinterface';
+import { Todo } from './utils/interface';
 import TodoList from './components/TodoList';
 
 function App() {
@@ -27,6 +27,29 @@ function App() {
     setInput(e.currentTarget.value);
   };
 
+  const handleDone = (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
+    const id = e.currentTarget.dataset.id as string;
+    setTodos((prev) => {
+      const copy = [...prev];
+      const index = copy.findIndex((item) => item.id === id);
+      const todo = copy[index];
+      copy.splice(index, 1, { id, content: todo.content, done: true });
+      return copy;
+    });
+  };
+
+  const handleDelete = (
+    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
+  ) => {
+    const id = e.currentTarget.dataset.id as string;
+    setTodos((prev) => {
+      const copy = [...prev];
+      const index = copy.findIndex((item) => item.id === id);
+      copy.splice(index, 1);
+      return copy;
+    });
+  };
+
   return (
     <div className='App'>
       <h1>Todo List with React and TypeScript</h1>
@@ -35,7 +58,12 @@ function App() {
         <input type='text' value={input} onChange={handleChange} />
         <button type='submit'>Add</button>
       </form>
-      <TodoList todos={todos} />
+      <TodoList
+        todos={todos}
+        handleDone={handleDone}
+        handleDelete={handleDelete}
+      />
+      <hr />
     </div>
   );
 }
