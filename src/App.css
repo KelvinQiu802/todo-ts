@@ -39,3 +39,13 @@
 .read-the-docs {
   color: #888;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+form input {
+  width: 300px;
+}
