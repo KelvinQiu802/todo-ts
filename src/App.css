@@ -49,3 +49,22 @@ form {
 form input {
   width: 300px;
 }
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.option h4:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

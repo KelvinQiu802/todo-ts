@@ -1,12 +1,8 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import './App.css';
-
-interface Todo {
-  id: string;
-  content: string;
-  done: boolean;
-}
+import { Todo } from './utils/iinterface';
+import TodoList from './components/TodoList';
 
 function App() {
   const [input, setInput] = React.useState('');
@@ -37,6 +33,7 @@ function App() {
         <input type='text' value={input} onChange={handleChange} />
         <button type='submit'>Add</button>
       </form>
+      <TodoList todos={todos} />
     </div>
   );
 }
